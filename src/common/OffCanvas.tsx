@@ -1,15 +1,17 @@
-  
-import  { useState } from 'react'
-import menu_data from '../data/menu-data';
+
+import { useState } from 'react'
+import menu_data, { MenuItem } from '../data/menu-data';
 import { Link } from 'react-router-dom';
 
 interface OffCanvasProps {
-  menuOpen: boolean; 
+  menuOpen: boolean;
   setMenuOpen: (value: boolean) => void;
+  menuData?: MenuItem[];
 }
 
 
-export default function OffCanvas({ menuOpen, setMenuOpen }: OffCanvasProps) {
+export default function OffCanvas({ menuOpen, setMenuOpen, menuData }: OffCanvasProps) {
+  const displayedMenu = menuData || menu_data;
 
   const [navTitle, setNavTitle] = useState("");
   //openMobileMenu
@@ -54,8 +56,8 @@ export default function OffCanvas({ menuOpen, setMenuOpen }: OffCanvasProps) {
         </div>
         <div className="wionmobile-menu">
           <ul>
-            {menu_data.map((item, i) => (
-              <li key={i} className={`menu-item-has-children wionitem-has-children ${navTitle === item.title ? "wionactive" : ""}`}>
+            {displayedMenu.map((item, i) => (
+              <li key={i} className={`${item.has_dropdown ? 'menu-item-has-children wionitem-has-children' : ''} ${navTitle === item.title ? "wionactive" : ""}`}>
                 <Link to={item.link}>
                   {item.title}
                   {item.has_dropdown && <span onClick={() => openMobileMenu(item.title)} className="wionmean-expand"></span>}

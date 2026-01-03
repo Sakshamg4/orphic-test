@@ -1,20 +1,10 @@
- 
-
-@import  "swiper/css/bundle";
-
-/* @import "slick-carousel/slick/slick.css";
-@import "slick-carousel/slick/slick-theme.css"; */
-
-
-
-
-@import "/assets/css/slick.css"; 
-@import "/assets/css/aos.css"; 
-@import "/assets/css/skn8ash.css";  
-@import "/assets/css/remixicon.css"; 
-@import "/assets/css/satoshi-font.css"; 
-@import "/assets/css/bootstrap.min.css"; 
-@import "/assets/css/main.css"; 
-@import "/assets/css/app.min.css"; 
-
- 
+@import "swiper/css/bundle";
+@import "/assets/css/slick.css";
+@import "/assets/css/aos.css";
+@import "/assets/css/skn8ash.css";
+@import "/assets/css/remixicon.css";
+@import "/assets/css/satoshi-font.css";
+@import "/assets/css/bootstrap.min.css";
+@import "/assets/css/main.css";
+@import "/assets/css/app.min.css";
+@import "./career.css";

@@ -1,7 +1,7 @@
-  
+
 import { Link } from 'react-router-dom';
-import  { useState } from 'react';
-import menu_data from '../../data/menu-data';
+import { useState } from 'react';
+import { menu_data_home_2 } from '../../data/menu-data';
 import OffCanvas from '../../common/OffCanvas';
 import Sidebar from '../../common/Sidebar';
 
@@ -34,8 +34,8 @@ const HeaderTwo = () => {
               <div className="wionmain-menu-item">
                 <nav className="main-menu menu-style1 d-none d-lg-block menu-left">
                   <ul>
-                    {menu_data.map((item, i) => (
-                      <li key={i} className="menu-item-has-children">
+                    {menu_data_home_2.map((item, i) => (
+                      <li key={i} className={item.has_dropdown ? "menu-item-has-children" : ""}>
                         <Link to={item.link}>{item.title}</Link>
                         {item.has_dropdown &&
                           <ul className="sub-menu">
@@ -75,8 +75,8 @@ const HeaderTwo = () => {
           </div>
         </div>
       </header>
-      <OffCanvas menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <Sidebar  setOffCanvasOpen={setOffCanvasOpen} offCanvasOpen={offCanvasOpen} />
+      <OffCanvas menuOpen={menuOpen} setMenuOpen={setMenuOpen} menuData={menu_data_home_2} />
+      <Sidebar setOffCanvasOpen={setOffCanvasOpen} offCanvasOpen={offCanvasOpen} />
     </>
   );
 };

@@ -1,6 +1,6 @@
- 
 
-import {  Suspense } from "react";
+
+import { Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeOne from "./components/homes/home-1";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -24,8 +24,9 @@ import BlogDetails from "./components/single-blog";
 import Contactus1 from "./components/contact-us1";
 import Contactus2 from "./components/contact-us2";
 import Contactus3 from "./components/contact-us3";
+import Career from "./components/career";
 import NotFound from "./error";
- 
+
 
 
 
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
   { path: "/contact-us1", element: <Contactus1 /> },
   { path: "/contact-us2", element: <Contactus2 /> },
   { path: "/contact-us3", element: <Contactus3 /> },
+  { path: "/career", element: <Career /> },
 
 
   { path: "*", element: <NotFound /> },

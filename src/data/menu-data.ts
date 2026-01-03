@@ -1,5 +1,6 @@
 
-interface MenuItem {
+
+export interface MenuItem {
   title: string;
   link: string;
   has_dropdown: boolean;
@@ -15,7 +16,8 @@ interface MenuItem {
 }[];
 
 
-const menu_data: MenuItem[]  = [
+
+const menu_data: MenuItem[] = [
   {
     title: "Demo",
     link: "#",
@@ -95,5 +97,56 @@ const menu_data: MenuItem[]  = [
     ],
   },
 ];
+
+
+
+export const menu_data_home_2: MenuItem[] = [
+  {
+    title: "Home",
+    link: "/home-2",
+    has_dropdown: false,
+  },
+  {
+    title: "About",
+    link: "#",
+    has_dropdown: true,
+    sub_menus: [
+      { title: "About Us", link: "/about-1" },
+      { title: "Team", link: "/team" },
+    ],
+  },
+  {
+    title: "Services",
+    link: "#",
+    has_dropdown: true,
+    sub_menus: [
+      { title: "Service 01", link: "/service" },
+      { title: "Service 02", link: "/single-service" },
+      { title: "Service 03", link: "/service" },
+      { title: "Pricing", link: "/pricing" },
+    ],
+  },
+  {
+    title: "Portfolio",
+    link: "#",
+    has_dropdown: true,
+    sub_menus: [
+      { title: "Portfolio Grid", link: "/portfolio-1" },
+      { title: "Portfolio Masonry", link: "/portfolio-2" },
+      { title: "Portfolio Details", link: "/single-portfolio" },
+    ],
+  },
+  {
+    title: "Contact",
+    link: "/contact-us1",
+    has_dropdown: false,
+  },
+  {
+    title: "Career",
+    link: "/career",
+    has_dropdown: false,
+  },
+];
+
 
 export default menu_data;
