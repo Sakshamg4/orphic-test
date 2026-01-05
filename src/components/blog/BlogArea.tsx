@@ -1,8 +1,45 @@
 
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
- 
+
+interface WPPost {
+  id: number;
+  date: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{ source_url: string }>;
+    'wp:term'?: Array<Array<{ name: string }>>;
+  };
+}
 
 export default function BlogArea() {
+  const [posts, setPosts] = useState<WPPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('https://blog.orphicsolution.com/wp-json/wp/v2/posts?_embed');
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+        const data = await response.json();
+        setPosts(data);
+        setLoading(false);
+      } catch (err) {
+        setError('Error loading blog posts');
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) return <div className="text-center py-5">Loading...</div>;
+  if (error) return <div className="text-center py-5 text-red-500">{error}</div>;
+
   return (
     <section className="wionabout-section1 wiondefault-bg">
       <div className="container">
@@ -11,103 +48,45 @@ export default function BlogArea() {
             <p>our creative ideas and insights</p>
           </div>
           <h1 className="aos-init" data-aos-delay="500" data-aos="fade-up">Our articles</h1>
-          
+
         </div>
         <div className="row">
           <div className="col-lg-8">
             <div className="blog-page-wrap">
-              <div className="wionblog-wrap mb-0 aos-init" data-aos-delay="400" data-aos="fade-up">
-                <div className="wionblog-thumb">
-                  <Link to="/single-blog">
-                    <img src="assets/images/blog/b1.png" alt="Thumb" />
-                  </Link>
-                  <Link to="/single-blog">
-                    <div className="wionblog-btn">Creative Agency</div>
-                  </Link>
-                </div>
-                <div className="wionblog-meta">
-                  <ul>
-                    <li>
-                      <Link to="/single-blog">20 June 2025 –</Link>
-                    </li>
-                    <li>10 min read</li>
-                  </ul>
-                </div>
-                <div className="wionblog-title">
-                  <Link to="/single-blog">
-                    <h3>Top 5 reasons to launch your product with a creative agency</h3>
-                  </Link>
-                </div>
-              </div>
-              <div className="wionblog-wrap mb-0 mt-50 aos-init" data-aos-delay="500" data-aos="fade-up">
-                <div className="wionblog-thumb">
-                  <Link to="/single-blog">
-                    <img src="assets/images/blog/b12.png" alt="Thumb" />
-                  </Link>
-                  <Link to="/single-blog">
-                    <div className="wionblog-btn">Technology</div>
-                  </Link>
-                </div>
-                <div className="wionblog-meta">
-                  <ul>
-                    <li>
-                      <Link to="/single-blog">28 June 2025 –</Link>
-                    </li>
-                    <li>8 min read</li>
-                  </ul>
-                </div>
-                <div className="wionblog-title">
-                  <Link to="/single-blog">
-                    <h3>How AI is reshaping agency-brand dynamics: At a glance</h3>
-                  </Link>
-                </div>
-              </div>
-              <div className="wionblog-wrap mb-0 mt-50 aos-init" data-aos-delay="600" data-aos="fade-up">
-                <div className="wionblog-thumb">
-                  <Link to="/single-blog">
-                    <img src="assets/images/blog/b13.png" alt="Thumb" />
-                  </Link>
-                  <Link to="/single-blog">
-                    <div className="wionblog-btn">UI/UX</div>
-                  </Link>
-                </div>
-                <div className="wionblog-meta">
-                  <ul>
-                    <li>
-                      <Link to="/single-blog">16 June 2025 –</Link>
-                    </li>
-                    <li>5 min read</li>
-                  </ul>
-                </div>
-                <div className="wionblog-title">
-                  <Link to="/single-blog">
-                    <h3>15 Best modern AI solutions as a foundation for UI/UX design</h3>
-                  </Link>
-                </div>
-              </div>
-              <div className="wionblog-wrap mb-0 mt-50 aos-init" data-aos-delay="700" data-aos="fade-up">
-                <div className="wionblog-thumb">
-                  <Link to="/single-blog">
-                    <img src="assets/images/blog/b14.png" alt="Thumb" />
-                  </Link>
-                  <Link to="/single-blog">
-                    <div className="wionblog-btn">Web Development</div>
-                  </Link>
-                </div>
-                <div className="wionblog-meta">
-                  <ul>
-                    <li>
-                      <Link to="/single-blog">10 June 2025 –</Link>
-                    </li>
-                    <li>8 min read</li>
-                  </ul>
-                </div>
-                <div className="wionblog-title">
-                  <Link to="/single-blog">
-                    <h3>FastHTML — Modern web applications in pure Python</h3>
-                  </Link>
-                </div>
-              </div>
+              {posts.map((post, i) => {
+                const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'assets/images/blog/default.jpg';
+                const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Blog';
+                const date = new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                return (
+                  <div key={post.id} className={`wionblog-wrap mb-0 ${i !== 0 ? 'mt-50' : ''} aos-init`} data-aos-delay={400 + (i * 100)} data-aos="fade-up">
+                    <div className="wionblog-thumb">
+                      <Link to={`/blog/${post.id}`}>
+                        <img src={imageUrl} alt={post.title.rendered} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                      </Link>
+                      <Link to={`/blog/${post.id}`}>
+                        <div className="wionblog-btn">{category}</div>
+                      </Link>
+                    </div>
+                    <div className="wionblog-meta">
+                      <ul>
+                        <li>
+                          <Link to={`/blog/${post.id}`}>{date} –</Link>
+                        </li>
+                        <li>5 min read</li>
+                      </ul>
+                    </div>
+                    <div className="wionblog-title">
+                      <Link to={`/blog/${post.id}`}>
+                        <h3 dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                      </Link>
+                    </div>
+                    <div className="wionblog-desc mt-3">
+                      <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="col-lg-4">

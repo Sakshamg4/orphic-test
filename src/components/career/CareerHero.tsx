@@ -1,25 +1,25 @@
 export default function CareerHero() {
     return (
-        <section className="wionabout-section1 wioncareer-hero-section">
-            <div className="container">
-                <div className="wionsection-title center">
-                    <div
-                        className="wionsub-title aos-init"
-                        data-aos-delay="400"
-                        data-aos="fade-up"
-                    >
-                        <p>CAREERS AT ORPHIC SOLUTION</p>
+        <section className="wiondefault-bg mb-0">
+            <div className="wionhero-section2" style={{ backgroundImage: 'url(assets/images/hero/hero-bg2.png)' }}>
+                <div className="container">
+                    <div className="wionhero-content2">
+                        <div className="wionsub-title title2 aos-init" data-aos-delay="200" data-aos="fade-up">
+                            <p>CAREERS AT ORPHIC SOLUTION</p>
+                        </div>
+                        <div className="aos-init" data-aos-delay="400" data-aos="fade-up">
+                            <h1>Join our team &</h1>
+                            <h1>build the future</h1>
+                        </div>
                     </div>
-                    <h1
-                        className="aos-init wioncareer-hero-title"
-                        data-aos-delay="500"
-                        data-aos="fade-up"
-                    >
-                        Join our team & <br /> build the future
-                    </h1>
-                    <p className="aos-init wioncareer-hero-desc" data-aos-delay="600" data-aos="fade-up">
-                        We are looking for passionate, creative, and driven individuals to help us build the next generation of digital experiences.
-                    </p>
+                    <div className="wionhero-data-wrap">
+                        <div className="wionhero-data-item aos-init" data-aos-delay="800" data-aos="fade-up" data-aos-offset="0">
+                            <h4>We are looking for passionate individuals to join us.</h4>
+                        </div>
+                        <div className="wionhero-data-item item2 aos-init" data-aos-delay="1000" data-aos="fade-up" data-aos-offset="0">
+                            <h4>Help us build the next generation of digital experiences.</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

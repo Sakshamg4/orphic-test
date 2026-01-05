@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
- 
+
 
 export default function HeroAreaHomeTwo() {
   return (
@@ -16,8 +16,8 @@ export default function HeroAreaHomeTwo() {
               <h1>to life creatively!</h1>
             </div>
 
-            <div className="mt-80">
-              <Link className="wiondefault-btn white-btn aos-init" data-aos-delay="600" data-aos="fade-up" to="/portfolio-1">View our work
+            <div className="mt-80" style={{ marginTop: '80px', position: 'relative', zIndex: 5 }}>
+              <Link className="wiondefault-btn white-btn aos-init" data-aos-delay="600" data-aos="fade-up" data-aos-offset="0" to="/portfolio-1">View our work
                 <span className="wionbutton-icon">
                   <img className="arry1" src="assets/images/svg/arrow-right.png" alt="" />
                   <img className="arry2" src="assets/images/svg/arrow-right.png" alt="" />
