@@ -331,7 +331,6 @@ export default function BlogDetailsArea() {
           </div>
         </div>
       </div>
-    </div>
     </section >
   )
 }
